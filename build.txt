@@ -1,0 +1,7 @@
+﻿displayName = Dye Easy
+author = goldenapple
+version = v1.3
+homepage = http://forums.terraria.org/index.php?threads/dye-easy-finally-crafting-dyes-is-a-bit-less-painful.37440/
+hideResources = false
+includeSource = true
+buildIgnore = obj\*, bin\*, *.csproj, .git\*, .gitattributes, .gitignore
