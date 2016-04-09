@@ -11,55 +11,53 @@ namespace DyeEasy
 	{
 		List<int> changedRecipes = new List<int>();
 		
-		public override void SetModInfo(out string name, ref ModProperties properties)
+		public DyeEasy()
 		{
-			name = "DyeEasy";
-			properties.Autoload = true;
-			properties.AutoloadGores = true;
-			properties.AutoloadSounds = true;
+			Properties = new ModProperties
+			{
+				Autoload = true,
+				AutoloadGores = true,
+				AutoloadSounds = true
+			};
 		}
 		
 		public override void AddRecipes()
 		{
 			for(int i = 0; i < Main.recipe.Length; i++)
 			{
-				Recipe recipe = Main.recipe[i];
+				var recipe = Main.recipe[i];
 				
 				if(recipe.createItem.dye != 0 && recipe.createItem.stack == 1) //If result is 1 dye
 				{
 					int dyeIngredients = 0;
-					bool bottledWater = false;
-					bool otherIngredients = false;
-					List<int> foundDyeTypes = new List<int>();
+					var foundDyeTypes = new List<int>();
+					bool foundBottledWater = false;
 					
-					foreach (Item item in recipe.requiredItem)
+					foreach(var item in recipe.requiredItem)
 					{
-						if(item != null && item.type != 0)
+						if(item != null)
 						{
-							if (item.dye != 0)
+							if(item.dye != 0)
 							{
 								dyeIngredients += item.stack;
 								foundDyeTypes.Add(item.type);
 							}
 							else if(item.type == ItemID.BottledWater)
-								bottledWater = true;
-							else
-								otherIngredients = true;
+								foundBottledWater = true;
 						}
 					}
-							
-					if(otherIngredients && dyeIngredients == 0 && !bottledWater) //Basic dyes
-					{ 
-						changedRecipes.Add(i);
+					
+					//Lunar dyes (ignore)
+					if(foundBottledWater)
+						continue;
+					//Basic dyes
+					if(dyeIngredients == 0)
 						recipe.createItem.stack = 3;
-					}
-					if(dyeIngredients > 0 && !bottledWater && !otherIngredients) //Compound dyes
-					{
-						if(foundDyeTypes.Count == 1) //If only one type of dye is used in the recipe
-						   continue; //Then don't change (ignore Intense Flame/Rainbow dyes etc.)
-						changedRecipes.Add(i);
+					//Compound dyes
+					else if(foundDyeTypes.Count > 1)
 						recipe.createItem.stack = dyeIngredients;
-					}
+					
+					changedRecipes.Add(i);
 				}
 			}
 		}
@@ -67,7 +65,8 @@ namespace DyeEasy
 		public override void Unload() //Revering changes
 		{
 			foreach(int recipeIndex in changedRecipes)
-				Main.recipe[recipeIndex].createItem.stack = 1;
+				if(recipeIndex < Main.recipe.Length) //You never know
+					Main.recipe[recipeIndex].createItem.stack = 1;
 		}
 	}
 }
