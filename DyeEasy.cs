@@ -11,16 +11,6 @@ namespace DyeEasy
 	{
 		List<int> changedRecipes = new List<int>();
 		
-		public DyeEasy()
-		{
-			Properties = new ModProperties
-			{
-				Autoload = true,
-				AutoloadGores = true,
-				AutoloadSounds = true
-			};
-		}
-		
 		public override void AddRecipes()
 		{
 			for(int i = 0; i < Main.recipe.Length; i++)
