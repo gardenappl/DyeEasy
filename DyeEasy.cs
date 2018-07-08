@@ -58,5 +58,9 @@ namespace DyeEasy
 				if(recipeIndex < Main.recipe.Length) //You never know
 					Main.recipe[recipeIndex].createItem.stack = 1;
 		}
+
+		//Hamstar's Mod Helpers integration
+		public static string GithubUserName { get { return "goldenapple3"; } }
+		public static string GithubProjectName { get { return "DyeEasy"; } }
 	}
 }
