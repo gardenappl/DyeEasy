@@ -5,3 +5,5 @@ But I'll tell you what this mod does anyway!
  -When combining recipes, you now get the same amount of dye that you used in the recipe (e.g. 1 Yellow Dye + 1 Orange Dye + 1 Red Dye = 3 Flame Dye)
  -Bright Flame, Intense Rainbow, Bright Silver and Lunar dye recipes are unchanged.
 Hopefully now you'll at least give regular old dyes a chance!
+
+Maintained by Pop000100
