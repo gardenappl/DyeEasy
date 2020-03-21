@@ -1,5 +1,5 @@
 ﻿displayName = Dye Easy
-author = goldenapple
+author = gardenappl
 version = 1.7
 homepage = http://forums.terraria.org/index.php?threads/dye-easy-finally-crafting-dyes-is-a-bit-less-painful.37440/
 hideResources = false
