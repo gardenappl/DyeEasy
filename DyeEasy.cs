@@ -17,7 +17,7 @@ namespace DyeEasy
 			{
 				var recipe = Main.recipe[i];
 				
-				if(recipe.createItem.dye != 0 && recipe.createItem.stack == 1) //If result is 1 dye
+				if(recipe.createItem.dye != 0 && recipe.createItem.stack == 2) //If result is 1 dye
 				{
 					int dyeIngredients = 0;
 					var foundDyeTypes = new List<int>();
@@ -56,7 +56,7 @@ namespace DyeEasy
 		{
 			foreach(int recipeIndex in changedRecipes)
 				if(recipeIndex < Main.recipe.Length) //You never know
-					Main.recipe[recipeIndex].createItem.stack = 1;
+					Main.recipe[recipeIndex].createItem.stack = 2;
 		}
 
 		//Hamstar's Mod Helpers integration
