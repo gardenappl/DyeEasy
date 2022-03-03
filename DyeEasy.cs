@@ -10,6 +10,7 @@ namespace DyeEasy
 	public class DyeEasy : Mod
 	{
 		List<int> changedRecipes = new List<int>();
+		List<int> originalStack = new List<int>();
 		
 		public override void AddRecipes()
 		{
@@ -17,7 +18,7 @@ namespace DyeEasy
 			{
 				var recipe = Main.recipe[i];
 				
-				if(recipe.createItem.dye != 0 && recipe.createItem.stack == 2) //If result is 1 dye
+				if(recipe.createItem.dye != 0)
 				{
 					int dyeIngredients = 0;
 					var foundDyeTypes = new List<int>();
@@ -36,9 +37,10 @@ namespace DyeEasy
 								foundBottledWater = true;
 						}
 					}
-					
+
+					originalStack.Add(recipe.createItem.stack);
 					//Lunar dyes (ignore)
-					if(foundBottledWater)
+					if (foundBottledWater)
 						continue;
 					//Basic dyes
 					if(dyeIngredients == 0)
@@ -52,11 +54,11 @@ namespace DyeEasy
 			}
 		}
 		
-		public override void Unload() //Revering changes
+		public override void Unload() //Reverting changes
 		{
 			foreach(int recipeIndex in changedRecipes)
 				if(recipeIndex < Main.recipe.Length) //You never know
-					Main.recipe[recipeIndex].createItem.stack = 2;
+					Main.recipe[recipeIndex].createItem.stack = originalStack[recipeIndex];
 		}
 
 		//Hamstar's Mod Helpers integration
